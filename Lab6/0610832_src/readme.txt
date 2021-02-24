@@ -1,0 +1,8 @@
+Training:
+執行implementations資料夾中wgan_div資料夾中的wgan_div檔案
+Generate images:
+執行implementations資料夾中wgan_div資料夾中generator_images檔
+Inception score:
+執行inception-score-pytorch資料夾中的inception_score檔
+P.S.
+助教因為我最後train是用另外一台gpu比較好的電腦train的，但我不小心把我最後train好的checkpoints刪掉了，所以我在資料夾裡放的是我之前留下的最後的checkpoints，所以可能結果會跟我的圖片不一樣QQ，但是code是同一份，只是最後train好的checkpoints是用了500000張圖片train了100個epoch的結果，那我交的那份是我先用20000張圖片train了89個epoch的結果，我很抱歉但我真的有train完。
