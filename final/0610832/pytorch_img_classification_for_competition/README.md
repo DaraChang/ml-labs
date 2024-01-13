@@ -1,49 +1,41 @@
-### pytorch 图像分类竞赛框架
+### Environment Setup
 
-### 1. 更新日志
-- (2020年5月2日) 基础版本上线
-
-### 2. 依赖库
-- pretrainedmodels
-- progress
-- efficientnet-pytorch
-- apex
-
-### 3. 支持功能
-
-- [x] pytorch官网模型
-- [x] [pretrained-models.pytorch](https://github.com/Cadene/pretrained-models.pytorch) 复现的部分模型
-- [x] [EfficientNet-PyTorch](https://github.com/lukemelas/EfficientNet-PyTorch) 
-- [x] fp16混合精度训练
-- [x] TTA
-- [x] 固定验证集/随机划分验证集
-- [x] 多种优化器：adam、radam、novograd、sgd、ranger、ralamb、over9000、lookahead、lamb
-- [x] OneCycle训练策略
-- [x] LabelSmoothLoss
-- [x] Focal Loss
-- [ ] AotuAgument
-  
-### 4. 使用方法
-更改`config.py`中的参数，训练执行 `python main.py`，预测执行`python test.py`
-
-### 5. submit_example.csv 
-每一行：filename,label
-样例：
+### 1. Virtual Environment Creation
+- Download Anaconda and then use conda commands to create a new virtual environment, specifying the Python version as 3.6.
 ```
-0001.jpg,dog
-0002.jpg,dog
-0003.jpg,dog
+$ conda create --name FP python=3.6
+$ conda activate FP
 ```
-注：预测图像可能没有label，所以label可以随意给个临时的，但一些比赛平台对都会给个提交样例，随意给个label
-### 6.TODO
 
-- [ ] 优化模型融合策略
-- [ ] 优化online数据增强
-- [ ] 优化pytorch官方模型调用接口
-- [ ] 增加模型全连接层初始化
-- [ ] 增加更多学习率衰减策略
-- [ ] 增加find lr
-- [ ] 增加dali
-- [ ] 增加wsl模型
-- [ ] 增加tensorboardX
-- [ ] 优化文件夹创建
+### 2. Packages
+- pytorch 1.2.0
+- torch 1.5.0
+- torchvision 0.4.0
+- CUDA 10.0
+- tqdm 4.46.1
+- scikit-learn 0.22.1
+- matplotlib 3.1.3
+- pandas 1.0.3
+- progress 1.3
+
+### Execution Instructions
+- The training dataset downloaded from the competition website should be placed in the './C1-P1_Train Dev_fixed/C1-P1_Train' directory.
+- The validation dataset downloaded from the competition website should be placed in the './C1-P1_Train Dev_fixed/C1-P1_Dev' directory.
+- The testing dataset downloaded from the competition website should be placed in the './C1-P1_Test' directory.
+- Generated checkpoints would be stored in the './checkpoints' directory.
+- The 'config.py' file defines all hyperparameters such as batch size, learning rate, training epochs, and number of classes as well as paths for storing checkpoints, datasets, and prediction results, etc. When conducting training or prediction, you can modify the parameters in this file before execution.
+
+
+- training
+```
+(FP)$ python main.py
+```
+
+- resume
+	- If you want to resume training from where it was last terminated, change the 'resume' parameter in 'config.py' from 'None' to the path where the checkpoints are stored.
+
+- testing
+```
+(FP)$ python test.py
+```
+	-The checkpoint with the highest validation accuracy during training will be loaded for prediction. The prediction results are stored in the './submits' directory.
